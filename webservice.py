@@ -13,7 +13,7 @@ def ocr_pdf():
         inpath = os.path.join(tmp, "in.pdf")
         outpath = os.path.join(tmp, "out.pdf")
         f.save(inpath)
-        ocrmypdf.ocr(inpath, outpath, deskew=True, redo_ocr=True)
+        ocrmypdf.ocr(inpath, outpath, redo_ocr=True)
         return send_file(outpath, mimetype='application/pdf')
 
 if __name__ == "__main__":
