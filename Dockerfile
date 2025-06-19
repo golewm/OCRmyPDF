@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y \
     tesseract-ocr-deu \
     qpdf \
     unpaper \
-  && curl -LO https://ftp.debian.org/debian/pool/main/g/ghostscript/ghostscript_10.05.1~dfsg-1_amd64.deb \
+  && curl -LO https://ftp.debian.org/debian/pool/main/g/ghostscript/ghostscript_10.05.1~dfsg-1_i386.deb \
   && apt-get install -y ./ghostscript_10.05.1~dfsg-1_amd64.deb \
   && rm ghostscript_10.05.1~dfsg-1_amd64.deb \
   && pip install ocrmypdf flask \
