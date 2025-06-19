@@ -13,7 +13,20 @@ def ocr_pdf():
         inpath = os.path.join(tmp, "in.pdf")
         outpath = os.path.join(tmp, "out.pdf")
         f.save(inpath)
-        ocrmypdf.ocr(inpath, outpath, redo_ocr=True, output_type="pdf")
+
+        # Optionale Parameter
+        force = request.args.get('force') == '1'
+        pdfa = request.args.get('pdfa') == '1'
+
+        kwargs = {}
+        if force:
+            kwargs["force_ocr"] = True
+        else:
+            kwargs["redo_ocr"] = True
+        if not pdfa:
+            kwargs["output_type"] = "pdf"
+
+        ocrmypdf.ocr(inpath, outpath, **kwargs)
         return send_file(outpath, mimetype='application/pdf')
 
 if __name__ == "__main__":
