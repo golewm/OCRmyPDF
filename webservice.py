@@ -10,7 +10,8 @@ def ocr_pdf():
         return "Missing file", 400
 
     with tempfile.TemporaryDirectory() as tmp:
-        inpath = os.path.join(tmp, "in.pdf")
+        ext = os.path.splitext(f.filename)[1] or ".pdf"
+        inpath = os.path.join(tmp, f"in{ext}")
         outpath = os.path.join(tmp, "out.pdf")
         f.save(inpath)
 
