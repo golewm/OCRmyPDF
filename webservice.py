@@ -28,7 +28,13 @@ def ocr_pdf():
             kwargs["output_type"] = "pdf"
 
         ocrmypdf.ocr(inpath, outpath, image_dpi=300, **kwargs)
-        return send_file(outpath, mimetype='application/pdf')
+
+        return send_file(
+            outpath,
+            mimetype='application/pdf',
+            as_attachment=True,
+            download_name="output.pdf"  # sorgt für n8n-kompatiblen Dateinamen
+        )
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
