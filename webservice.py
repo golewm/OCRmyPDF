@@ -26,7 +26,7 @@ def ocr_pdf():
         if not pdfa:
             kwargs["output_type"] = "pdf"
 
-        ocrmypdf.ocr(inpath, outpath, **kwargs)
+        ocrmypdf.ocr(inpath, outpath, image_dpi=300, **kwargs)
         return send_file(outpath, mimetype='application/pdf')
 
 if __name__ == "__main__":
