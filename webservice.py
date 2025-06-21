@@ -99,55 +99,89 @@ Upload-Feld <code>file</code> (PDF / Bild). Rückgabe: durchsuchbares PDF.<br>
 
 <h2>Optionen</h2>
 <table>
-<tr><th>Parameter</th><th>Zulässige Werte</th><th>Default</th><th>Wirkung</th></tr>
+  <tr>
+    <th>Parameter</th>
+    <th>Standardwert</th>
+    <th>Beschreibung</th>
+    <th>Mögliche&nbsp;Werte</th>
+  </tr>
 
-<tr><td><code>force</code></td>
-    <td><code>1</code></td><td>0</td>
-    <td>OCR auch dann erzwingen, wenn das PDF bereits Textebenen enthält.</td></tr>
+  <tr>
+    <td><code>force</code></td>
+    <td>0</td>
+    <td>OCR erzwingen, auch wenn das PDF bereits Textebenen enthält.</td>
+    <td><code>1</code></td>
+  </tr>
 
-<tr><td><code>pdfa</code></td>
-    <td><code>1</code></td><td>0</td>
-    <td>Ergebnis als PDF/A (benötigt Ghostscript ≥ 10.03).</td></tr>
+  <tr>
+    <td><code>pdfa</code></td>
+    <td>0</td>
+    <td>Ergebnis als PDF/A (benötigt Ghostscript ≥ 10.03).</td>
+    <td><code>1</code></td>
+  </tr>
 
-<tr><td><code>lang</code></td>
-    <td><code>deu</code>, <code>eng</code>, <code>rus</code> oder Kombination
-        (<code>deu+eng</code>)</td>
+  <tr>
+    <td><code>lang</code></td>
     <td><code>deu</code></td>
-    <td>Tesseract-Sprachmodelle für die Erkennung.</td></tr>
+    <td>Tesseract-Sprachmodelle für die Erkennung.</td>
+    <td><code>deu</code>, <code>eng</code>, <code>rus</code>, Kombination z.&nbsp;B. <code>deu+eng</code></td>
+  </tr>
 
-<tr><td><code>oem</code></td>
-    <td>0 Legacy+LSTM • 1 LSTM-only • 2 Legacy-only • 3 Auto</td>
+  <tr>
+    <td><code>oem</code></td>
     <td>1</td>
-    <td>Wählt die Tesseract-Engine. 1 liefert meist die besten Resultate.</td></tr>
+    <td>Wählt die Tesseract-Engine. 1 liefert meist beste Resultate.</td>
+    <td>0 Legacy+LSTM • 1 LSTM-only • 2 Legacy-only • 3 Auto</td>
+  </tr>
 
-<tr><td><code>psm</code></td>
-    <td>0 – 13 (numerisch)</td><td>–</td>
-    <td>Page-Segmentation-Mode. Z.&nbsp;B. 6 = “Ein Block Text”, 11 = Sparse Text.</td></tr>
-
-<tr><td><code>mode</code></td>
-    <td><code>chaotic</code></td><td>–</td>
-    <td>Kurzname – setzt intern <code>psm=11</code> (Sparse-Text-Modus).</td></tr>
-
-<tr><td><code>rotate</code></td>
-    <td><code>1</code></td><td>0</td>
-    <td>Dreht Seiten automatisch, falls Kopf / Fuß vertauscht.</td></tr>
-
-<tr><td><code>deskew</code></td>
-    <td><code>1</code></td><td>0</td>
-    <td>Begradigt schräg eingescannten Text.</td></tr>
-
-<tr><td><code>bg</code></td>
-    <td><code>1</code></td><td>0</td>
-    <td>Entfernt graue Hintergrundschleier (typisch bei Kopien).</td></tr>
-
-<tr><td><code>clean</code></td>
-    <td><code>1</code></td><td>0</td>
-    <td>Unpaper-Cleanup: entfernt Flecken/Ränder (nur für Bilder relevant).</td></tr>
-
-<tr><td><code>wl</code></td>
-    <td>Zeichenliste, z.&nbsp;B. <code>/0123456789</code></td>
+  <tr>
+    <td><code>psm</code></td>
     <td>–</td>
-    <td>Whitelist → Tesseract erkennt ausschließlich diese Zeichen.</td></tr>
+    <td>Page-Segmentation-Mode (z.&nbsp;B. 6 = “Ein Block Text”, 11 = Sparse Text).</td>
+    <td>0 – 13 (numerisch)</td>
+  </tr>
+
+  <tr>
+    <td><code>mode</code></td>
+    <td>–</td>
+    <td>Kurzname – setzt intern <code>psm=11</code> (Sparse-Text-Modus).</td>
+    <td><code>chaotic</code></td>
+  </tr>
+
+  <tr>
+    <td><code>rotate</code></td>
+    <td>0</td>
+    <td>Dreht Seiten automatisch, falls Kopf/Fuß vertauscht.</td>
+    <td><code>1</code></td>
+  </tr>
+
+  <tr>
+    <td><code>deskew</code></td>
+    <td>0</td>
+    <td>Begradigt schräg eingescannten Text.</td>
+    <td><code>1</code></td>
+  </tr>
+
+  <tr>
+    <td><code>bg</code></td>
+    <td>0</td>
+    <td>Entfernt graue Hintergrundschleier (typisch bei Kopien).</td>
+    <td><code>1</code></td>
+  </tr>
+
+  <tr>
+    <td><code>clean</code></td>
+    <td>0</td>
+    <td>Unpaper-Cleanup: entfernt Flecken/Ränder (nur für Bilder relevant).</td>
+    <td><code>1</code></td>
+  </tr>
+
+  <tr>
+    <td><code>wl</code></td>
+    <td>–</td>
+    <td>Whitelist – Tesseract erkennt ausschließlich diese Zeichen.</td>
+    <td>Zeichenliste, z.&nbsp;B. <code>/0123456789</code></td>
+  </tr>
 </table>
 
 <h2>Beispiele</h2>
