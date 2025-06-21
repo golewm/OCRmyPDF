@@ -130,7 +130,9 @@ Upload-Feld <code>file</code> (PDF / Bild). Rückgabe: durchsuchbares PDF.<br>
   <tr>
     <td><code>oem</code></td>
     <td>1</td>
-    <td>Wählt die Tesseract-Engine. '1' Liefert meist beste Resultate <br>
+    <td>Wählt die Tesseract-Engine.<br>
+    1 - Liefert meist beste Resultate </td>
+    <td>
     <code>0</code> Legacy+LSTM<br>
     <code>1</code> LSTM-only<br>
     <code>2</code> Auto<br>
@@ -140,12 +142,15 @@ Upload-Feld <code>file</code> (PDF / Bild). Rückgabe: durchsuchbares PDF.<br>
 <tr>
   <td><code>psm</code></td>
   <td>–</td>
-  <td>Page-Segmentation-Mode.</td>
+  <td>Page-Segmentation-Mode.<br>
+  3 - voreingestellt<br>
+  11 - spärlicher Text
+  </td>
   <td>
     <code>0</code> Nur Ausrichtung + Schrifterkennung (OSD)<br>
-    <code>1</code> Automatische Segmentierung mit OSD<br>
-    <code>2</code> Automatische Segmentierung, ohne OSD/OCR (nicht implementiert)<br>
-    <code>3</code> Vollautomatische Segmentierung, ohne OSD&nbsp;(Voreinstellung)<br>
+    <code>1</code> Auto-Segmentierung mit OSD<br>
+    <code>2</code> Auto-Segmentierung, ohne OSD/OCR (nicht implementiert)<br>
+    <code>3</code> Vollauto-Segmentierung, ohne OSD&nbsp;(Voreinstellung)<br>
     <code>4</code> Eine Spalte Text variabler Größen<br>
     <code>5</code> Ein gleichförmiger Block vertikal ausgerichteten Textes<br>
     <code>6</code> Ein gleichförmiger Textblock<br>
