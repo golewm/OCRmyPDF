@@ -1,4 +1,4 @@
-from flask import Flask, request, send_file, jsonify
+from flask import Flask, request, send_file, render_template_string
 import tempfile, os, ocrmypdf
 
 app = Flask(__name__)
@@ -25,9 +25,10 @@ def ocr_pdf():
         clean = request.args.get('clean') == '1'
         oem = int(request.args.get('oem', 2))
 
-        kwargs = {}
-        kwargs["image_dpi"] = 300
-        kwargs["tesseract_oem"] = oem
+        kwargs = {
+            "image_dpi": 300,
+            "tesseract_oem": oem,
+        }
 
         if force:
             kwargs["force_ocr"] = True
@@ -57,23 +58,48 @@ def ocr_pdf():
 
 @app.route('/docs', methods=['GET'])
 def docs():
-    return jsonify({
-        "description": "OCR API mit Tesseract/LSTM über OCRmyPDF",
-        "method": "POST",
-        "content_type": "multipart/form-data",
-        "file_field": "file (binär)",
-        "query_parameters": {
-            "force": "1 = immer OCR ausführen (auch wenn Text erkennbar ist)",
-            "pdfa": "1 = PDF/A erzeugen, sonst Standard-PDF",
-            "mode": "chaotic = Tesseract PSM 11 (Sparse Text Mode)",
-            "rotate": "1 = Seiten automatisch drehen (wenn nötig)",
-            "deskew": "1 = schiefe Seiten automatisch begradigen",
-            "bg": "1 = Hintergrund entfernen",
-            "clean": "1 = Artefakte/Kanten entfernen",
-            "oem": "Tesseract-OCR Engine Mode (Standard = 2 = LSTM-only)"
-        },
-        "example_curl": "curl -X POST 'http://host:5000/?force=1&mode=chaotic' -F 'file=@scan.pdf' --output output.pdf"
-    })
+    html = """
+    <html>
+    <head>
+        <title>OCR-API Dokumentation</title>
+        <style>
+            body { font-family: sans-serif; padding: 2em; }
+            table { border-collapse: collapse; width: 100%; }
+            th, td { border: 1px solid #ddd; padding: 0.5em; }
+            th { background-color: #f2f2f2; }
+            code { background: #eee; padding: 0.2em; }
+        </style>
+    </head>
+    <body>
+        <h1>OCR Webservice API</h1>
+        <p>Diese API verarbeitet PDF- oder Bilddateien und fügt erkannten Text hinzu.</p>
+
+        <h2>Endpunkt</h2>
+        <p><code>POST /</code> – Datei per <code>multipart/form-data</code> senden</p>
+
+        <h2>Query-Parameter</h2>
+        <table>
+            <tr><th>Name</th><th>Beschreibung</th></tr>
+            <tr><td><code>force=1</code></td><td>Immer OCR ausführen (auch wenn bereits Text vorhanden ist)</td></tr>
+            <tr><td><code>pdfa=1</code></td><td>Erzeuge PDF/A statt normalem PDF</td></tr>
+            <tr><td><code>mode=chaotic</code></td><td>Tesseract PSM 11 (Sparse Text Mode)</td></tr>
+            <tr><td><code>rotate=1</code></td><td>Seiten automatisch drehen</td></tr>
+            <tr><td><code>deskew=1</code></td><td>Schiefe Seiten begradigen</td></tr>
+            <tr><td><code>bg=1</code></td><td>Hintergrund entfernen</td></tr>
+            <tr><td><code>clean=1</code></td><td>Störende Ränder/Artefakte entfernen</td></tr>
+            <tr><td><code>oem=2</code></td><td>Tesseract OCR Engine Mode (z. B. 1 = Legacy, 2 = LSTM)</td></tr>
+        </table>
+
+        <h2>Beispielaufruf (cURL)</h2>
+        <pre>
+curl -X POST "http://localhost:5000/?force=1&mode=chaotic" \\
+     -F "file=@dokument.pdf" \\
+     --output output.pdf
+        </pre>
+    </body>
+    </html>
+    """
+    return render_template_string(html)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
