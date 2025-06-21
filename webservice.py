@@ -134,12 +134,27 @@ Upload-Feld <code>file</code> (PDF / Bild). Rückgabe: durchsuchbares PDF.<br>
     <td>0 Legacy+LSTM • 1 LSTM-only • 2 Legacy-only • 3 Auto</td>
   </tr>
 
-  <tr>
-    <td><code>psm</code></td>
-    <td>–</td>
-    <td>Page-Segmentation-Mode (z.&nbsp;B. 6 = “Ein Block Text”, 11 = Sparse Text).</td>
-    <td>0 – 13 (numerisch)</td>
-  </tr>
+<tr>
+  <td><code>psm</code></td>
+  <td>–</td>
+  <td>Page-Segmentation-Mode.</td>
+  <td>
+    <code>0</code> Nur Ausrichtung + Schrifterkennung (OSD)<br>
+    <code>1</code> Automatische Segmentierung mit OSD<br>
+    <code>2</code> Automatische Segmentierung, ohne OSD/OCR (nicht implementiert)<br>
+    <code>3</code> Vollautomatische Segmentierung, ohne OSD&nbsp;(Voreinstellung)<br>
+    <code>4</code> Eine Spalte Text variabler Größen<br>
+    <code>5</code> Ein gleichförmiger Block vertikal ausgerichteten Textes<br>
+    <code>6</code> Ein gleichförmiger Textblock<br>
+    <code>7</code> Eine einzige Textzeile<br>
+    <code>8</code> Ein einzelnes Wort<br>
+    <code>9</code> Ein einzelnes Wort im Kreis<br>
+    <code>10</code> Ein einzelnes Zeichen<br>
+    <code>11</code> Spärlicher Text – so viel wie möglich, beliebige Reihenfolge<br>
+    <code>12</code> Spärlicher Text mit OSD<br>
+    <code>13</code> Rohzeile – eine Textzeile ohne Tesseract-spezifische Tricks
+  </td>
+</tr>
 
   <tr>
     <td><code>mode</code></td>
