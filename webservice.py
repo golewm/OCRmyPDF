@@ -130,8 +130,11 @@ Upload-Feld <code>file</code> (PDF / Bild). Rückgabe: durchsuchbares PDF.<br>
   <tr>
     <td><code>oem</code></td>
     <td>1</td>
-    <td>Wählt die Tesseract-Engine. 1 liefert meist beste Resultate.</td>
-    <td>0 Legacy+LSTM • 1 LSTM-only • 2 Legacy-only • 3 Auto</td>
+    <td>Wählt die Tesseract-Engine. '1' Liefert meist beste Resultate <br>
+    <code>0</code> Legacy+LSTM<br>
+    <code>1</code> LSTM-only<br>
+    <code>2</code> Auto<br>
+    </td>
   </tr>
 
 <tr>
