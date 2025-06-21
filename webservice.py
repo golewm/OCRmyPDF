@@ -25,10 +25,9 @@ def ocr_pdf():
         clean = request.args.get('clean') == '1'
         oem = int(request.args.get('oem', 2))
 
-        kwargs = {
-            "image_dpi": 300,
-            "tesseract_oem": oem,
-        }
+        kwargs = {}
+        kwargs["image_dpi"] = 300
+        kwargs["tesseract_oem"] = oem
 
         if force:
             kwargs["force_ocr"] = True
@@ -59,43 +58,42 @@ def ocr_pdf():
 @app.route('/docs', methods=['GET'])
 def docs():
     html = """
+    <!DOCTYPE html>
     <html>
     <head>
-        <title>OCR-API Dokumentation</title>
+        <title>OCR API Dokumentation</title>
         <style>
-            body { font-family: sans-serif; padding: 2em; }
-            table { border-collapse: collapse; width: 100%; }
-            th, td { border: 1px solid #ddd; padding: 0.5em; }
-            th { background-color: #f2f2f2; }
-            code { background: #eee; padding: 0.2em; }
+            body { font-family: sans-serif; margin: 40px; }
+            h1 { color: #333; }
+            table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+            th, td { border: 1px solid #ccc; padding: 8px; }
+            th { background: #eee; }
+            code { background: #f4f4f4; padding: 2px 4px; border-radius: 4px; }
         </style>
     </head>
     <body>
-        <h1>OCR Webservice API</h1>
-        <p>Diese API verarbeitet PDF- oder Bilddateien und fügt erkannten Text hinzu.</p>
+        <h1>📄 OCR API Dokumentation</h1>
+        <p>POST-Anfrage an <code>/</code> mit einem PDF oder Bild als Datei-Upload.</p>
 
-        <h2>Endpunkt</h2>
-        <p><code>POST /</code> – Datei per <code>multipart/form-data</code> senden</p>
-
-        <h2>Query-Parameter</h2>
+        <h2>🔧 Query-Parameter</h2>
         <table>
-            <tr><th>Name</th><th>Beschreibung</th></tr>
-            <tr><td><code>force=1</code></td><td>Immer OCR ausführen (auch wenn bereits Text vorhanden ist)</td></tr>
-            <tr><td><code>pdfa=1</code></td><td>Erzeuge PDF/A statt normalem PDF</td></tr>
-            <tr><td><code>mode=chaotic</code></td><td>Tesseract PSM 11 (Sparse Text Mode)</td></tr>
-            <tr><td><code>rotate=1</code></td><td>Seiten automatisch drehen</td></tr>
-            <tr><td><code>deskew=1</code></td><td>Schiefe Seiten begradigen</td></tr>
-            <tr><td><code>bg=1</code></td><td>Hintergrund entfernen</td></tr>
-            <tr><td><code>clean=1</code></td><td>Störende Ränder/Artefakte entfernen</td></tr>
-            <tr><td><code>oem=2</code></td><td>Tesseract OCR Engine Mode (z. B. 1 = Legacy, 2 = LSTM)</td></tr>
+            <tr><th>Parameter</th><th>Beschreibung</th><th>Typ / Wert</th></tr>
+            <tr><td><code>force</code></td><td>Immer OCR ausführen</td><td><code>1</code></td></tr>
+            <tr><td><code>pdfa</code></td><td>PDF/A erzeugen</td><td><code>1</code></td></tr>
+            <tr><td><code>mode</code></td><td>Seitenlayout-Modus (PSM 11)</td><td><code>chaotic</code></td></tr>
+            <tr><td><code>rotate</code></td><td>Seiten automatisch drehen</td><td><code>1</code></td></tr>
+            <tr><td><code>deskew</code></td><td>Begradigung schiefer Seiten</td><td><code>1</code></td></tr>
+            <tr><td><code>bg</code></td><td>Hintergrund entfernen</td><td><code>1</code></td></tr>
+            <tr><td><code>clean</code></td><td>Störungen und Kanten entfernen</td><td><code>1</code></td></tr>
+            <tr><td><code>oem</code></td><td>Tesseract OCR Engine Mode</td><td><code>0</code> bis <code>3</code> (Standard = 2)</td></tr>
         </table>
 
-        <h2>Beispielaufruf (cURL)</h2>
-        <pre>
-curl -X POST "http://localhost:5000/?force=1&mode=chaotic" \\
-     -F "file=@dokument.pdf" \\
+        <h2>🧪 Beispielaufruf (cURL)</h2>
+        <pre><code>
+curl -X POST "http://host:5000/?force=1&mode=chaotic" \
+     -F "file=@test.pdf" \
      --output output.pdf
-        </pre>
+        </code></pre>
     </body>
     </html>
     """
